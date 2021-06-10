@@ -15,15 +15,19 @@ class CreateFavoritesTable extends Migration
     {
         Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('micropost_id');
             $table->timestamps();
+
+            // 外部キー制約
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('micropost_id')->references('id')->on('users')->onDelete('cascade');
+
+            // user_idとmicropost_idの組み合わせの重複を許さない
+            $table->unique(['user_id', 'micropost_id']);
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('favorites');
