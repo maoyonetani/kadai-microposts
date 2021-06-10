@@ -143,21 +143,15 @@ class User extends Authenticatable
         // フォロー中ユーザの中に $userIdのものが存在するか
         return $this->followings()->where('follow_id', $userId)->exists();
     }
-}
     
     
     
     
     
-    
-    
-    
-    //投稿カウント
-        public function loadRelationshipCounts()
+    public function loadRelationshipCounts()
     {
         $this->loadCount('microposts');
     }
-    
     
     
     
