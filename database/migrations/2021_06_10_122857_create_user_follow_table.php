@@ -15,7 +15,8 @@ class CreateUserFollowTable extends Migration
     {
         Schema::create('user_follow', function (Blueprint $table) {
             //Schemaファザードでcreateメソッド
-            //createメソッドでは、第１引数にテーブル名のusers、第２引数にクロージャを指定する。
+            //createメソッドでは、第１引数にテーブル名のusers_follow、第２引数にクロージャを指定する。
+            //users_followはmigrationのtableに入る
             //クロージャでは、第１引数にBlueprintオブジェクト、第２引数に$tableを指定する。
             //Blueprintオブジェクトのメソッドでカラムを定義する。カラムの型名が、そのままメソッド名になっている。
             //メソッドの実行には->（メソッドチェーン）が使用される。

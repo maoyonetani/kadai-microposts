@@ -21,6 +21,12 @@
                                 {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
                             {!! Form::close() !!}
                         @endif
+                        
+                        
+                        {{-- お気に入り/解除ボタン --}}
+                        //フォルダ名.ファイル名
+                        @include('favorites.favorite_button')
+                        
                     </div>
                 </div>
             </li>
@@ -29,3 +35,4 @@
     {{-- ページネーションのリンク --}}
     {{ $microposts->links() }}
 @endif
+

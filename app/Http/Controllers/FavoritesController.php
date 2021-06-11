@@ -13,6 +13,8 @@ class FavoritesController extends Controller
     public function store($id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザをお気に入りする
+        //Auth::user()は、user.phpの意
+        //user()->favorite($id);は、user.phpのモデルからfavoriteの呼び出し
         \Auth::user()->favorite($id);
         // 前のURLへリダイレクトさせる
         return back();
@@ -27,7 +29,7 @@ class FavoritesController extends Controller
     public function destroy($id)
     {
         // 認証済みユーザ（閲覧者）が、 idのユーザをアンフォローする
-        \Auth::user()->unvfavorite($id);
+        \Auth::user()->unfavorite($id);
         // 前のURLへリダイレクトさせる
         return back();
     }

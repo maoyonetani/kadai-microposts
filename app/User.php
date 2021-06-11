@@ -182,7 +182,7 @@ class User extends Authenticatable
 
         public function favorites()
     {
-        return $this->belongsToMany(User::class, 'favorites', 'user_id','micropost_id')->withTimestamps();
+        return $this->belongsToMany(Micropost::class, 'favorites', 'user_id','micropost_id')->withTimestamps();
     }
     
     
@@ -192,22 +192,20 @@ class User extends Authenticatable
     /**
      * $userIdで指定されたユーザをお気に入りする。
      *
-     * @param  int  $userId
+     * @param  int  $micropostId
      * @return bool
      */
-    public function favorite($userId)
+    public function favorite($micropostId)
     {
         // すでにお気に入りしているかの確認
-        $exist = $this->is_favoriting($userId);
-        // 対象が自分自身かどうかの確認
-        $its_me = $this->id == $userId;
+        $exist = $this->is_favoriting($micropostId);
 
-        if ($exist || $its_me) {
+        if ($exist) {
             // すでにお気に入りしていれば何もしない
             return false;
         } else {
             // 未お気に入りであればお気に入りする
-            $this->favorites()->attach($userId);
+            $this->favorites()->attach($micropostId);
             return true;
         }
     }
@@ -217,19 +215,17 @@ class User extends Authenticatable
     /**
      * $userIdで指定されたユーザをお気に入りを外す。
      *
-     * @param  int  $userId
+     * @param  int  $micropostId
      * @return bool
      */
-    public function unfavorite($userId)
+    public function unfavorite($micropostId)
     {
         // すでにお気に入りしているかの確認
-        $exist = $this->is_favoriting($userId);
-        // 対象が自分自身かどうかの確認
-        $its_me = $this->id == $userId;
+        $exist = $this->is_favoriting($micropostId);
 
-        if ($exist && !$its_me) {
+        if ($exist) {
             // すでにお気に入りしていればお気に入りを外す
-            $this->favorites()->detach($userId);
+            $this->favorites()->detach($micropostId);
             return true;
         } else {
             // 未お気に入りであれば何もしない
@@ -238,24 +234,20 @@ class User extends Authenticatable
     }
     
         /**
-     * 指定された $userIdのユーザをこのユーザがお気に入りであるか調べる。お気に入り中ならtrueを返す。
+     * 指定された $micropostIdのユーザをこのユーザがお気に入りであるか調べる。お気に入り中ならtrueを返す。
      *
-     * @param  int  $userId
+     * @param  int $micropostId
      * @return bool
      */
-    public function is_favoriting($userId)
+    public function is_favoriting($micropostId)
     {
-        // フォロー中ユーザの中に $userIdのものが存在するか
-        return $this->favorites()->where('micropost_id', $userId)->exists();
+        // フォロー中ユーザの中に $micropostIdのものが存在するか
+        return $this->favorites()->where('micropost_id', $micropostId)->exists();
     }
     
     
     
-    
-    
-    
-    
-    
+
     
     
         /**
