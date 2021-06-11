@@ -1,4 +1,4 @@
-//card.blade.phpはプロフィール
+{{--card.blade.phpはプロフィール--}}
 
 <div class="card">
     <div class="card-header">

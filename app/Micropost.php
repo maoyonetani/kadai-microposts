@@ -16,8 +16,11 @@ class Micropost extends Model
         return $this->belongsTo(User::class);
     }
     
+    
+    
       public function favorite_users()
     {
-        return $this->belongsTo(User::class);
+        //クラス,中間テーブル,テーブルID、テーブルID）
+        return $this->belongsTo(User::class,'favorites','micropost_id','user_id')->withTimestamps();
     }
 }
