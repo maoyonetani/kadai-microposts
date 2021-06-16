@@ -27,7 +27,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
-    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+    Route::resource('microposts', 'MicropostsController');
 });
 
 
@@ -41,7 +41,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('favorites', 'UsersController@favorites')->name('users.favorites');    // 追加
     });
 
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
 
     // 追加
     Route::group(['prefix' => 'microposts/{id}'], function () {
@@ -49,5 +48,5 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('users.unfavorite');
     });
 
-    Route::resource('microposts', 'MicropostsController', ['only' => ['store', 'destroy']]);
+
 });

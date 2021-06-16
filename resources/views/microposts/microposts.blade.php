@@ -14,15 +14,25 @@
                         {{-- 投稿内容 --}}
                         <p class="mb-0">{!! nl2br(e($micropost->content)) !!}</p>
                     </div>
-                    <div>
+                    <div class="d-flex">
+
+                        @if (Auth::id() == $micropost->user_id)　
+                            {{-- 投稿編集ボタンのフォーム --}}
+                            {!! Form::open(['route' => ['microposts.edit', $micropost->id], 'method' => 'get']) !!}
+                                {!! Form::button('<i class="fas fa-edit"></i>', ['class' => 'btn btn-primary btn-sm', 'type' => 'submit']) !!}
+                            {!! Form::close() !!}
+                        @endif
+
+                        <div>                        
                         @if (Auth::id() == $micropost->user_id)
                             {{-- 投稿削除ボタンのフォーム --}}
                             {!! Form::open(['route' => ['microposts.destroy', $micropost->id], 'method' => 'delete']) !!}
-                                {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-sm']) !!}
+                                {!! Form::button('<i class="fas fa-backspace"></i>', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}
                             {!! Form::close() !!}
                         @endif
-                    
-                        
+                        </div>
+
+                    <div class="btn-group ml-auto">   
                         {{-- お気に入り/解除ボタン --}}
                         @include('favorites.favorite_button')
                         

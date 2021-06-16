@@ -6,7 +6,7 @@
         {{--favorites.unfavoriteは、User.phpのUserクラスのunfavorite--}}
         
         {!! Form::open(['route' => ['users.unfavorite', $micropost->id], 'method' => 'delete']) !!}
-            {!! Form::submit('Unfavorite', ['class' => "btn btn-light btn-sm"]) !!}
+            {!! Form::submit('Unfavorite', ['class' => "btn btn-secondary btn-sm"]) !!}
         {!! Form::close() !!}
     @else
         {{-- お気に入りボタンのフォーム --}}

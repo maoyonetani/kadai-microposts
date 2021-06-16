@@ -45,6 +45,38 @@ class MicropostsController extends Controller
     }
     
     
+            public function edit($id)
+    {
+        // idの値で投稿を検索して取得
+        $micropost = \App\Micropost::findOrFail($id);
+
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を編集
+        if (\Auth::id() === $micropost->user_id) {
+            return view('microposts.edit', [
+            'micropost' => $micropost,
+        ]);
+    }
+
+        // 前のURLへリダイレクトさせる
+        return back();
+    }
+    
+    
+        // putまたはpatchでmicroposts/idにアクセスされた場合の「更新処理」
+        public function update(Request $request, $id)
+    {
+        // idの値で投稿を検索して取得
+        $micropost = \App\Micropost::findOrFail($id);
+        
+        // メッセージを更新
+        $micropost->content = $request->content;
+        $micropost->save();
+
+        // 前のURLへリダイレクトさせる
+        return redirect('/');
+    }
+    
+    
     
         public function destroy($id)
     {

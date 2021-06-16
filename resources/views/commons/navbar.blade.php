@@ -1,9 +1,10 @@
 <header class="mb-4">
     <nav class="navbar navbar-expand-sm navbar-dark "style="background-color:#00acee;">
         {{-- トップページへのリンク --}}
-        <a class="navbar-brand" href="/">Microposts</a>
-                <img src="logo.png" width="30" height="30" alt="">
-                
+                <i class="fab fa-twitter fa-lg "style="color:white" ></i>
+                        <a class="navbar-brand" href="/"> Microposts</a>
+                        
+                        
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#nav-bar">
             <span class="navbar-toggler-icon"></span>
         </button>
