@@ -45,6 +45,7 @@ class UsersController extends Controller
         $user = User::findOrFail($id);
 
         // メッセージ編集ビューでそれを表示
+        if (\Auth::id() === $user->id) {
         return view('users.edit', [
             'user' => $user,
             'name' => $user->name,
@@ -52,6 +53,9 @@ class UsersController extends Controller
             'area' => $user->area,
             'profile' => $user->profile,
         ]);
+        }
+                
+        return back();
     }
     
     
