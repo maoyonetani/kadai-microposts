@@ -26,7 +26,7 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::resource('users', 'UsersController', ['only' => ['index', 'show']]);
+    Route::resource('users', 'UsersController');
     Route::resource('microposts', 'MicropostsController');
 });
 
@@ -47,6 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('favorite', 'FavoritesController@store')->name('users.favorite');
         Route::delete('unfavorite', 'FavoritesController@destroy')->name('users.unfavorite');
     });
-
+    
 
 });

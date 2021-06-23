@@ -38,6 +38,48 @@ class UsersController extends Controller
     }
     
     
+        // getでmessages/id/editにアクセスされた場合の「更新画面表示処理」
+    public function edit($id)
+    {
+        // idの値でを検索して取得
+        $user = User::findOrFail($id);
+
+        // メッセージ編集ビューでそれを表示
+        return view('users.edit', [
+            'user' => $user,
+            'name' => $user->name,
+            'age' => $user->age,
+            'area' => $user->area,
+            'profile' => $user->profile,
+        ]);
+    }
+    
+    
+
+    // putまたはpatchでmessages/idにアクセスされた場合の「更新処理」
+    public function update(Request $request, $id)
+    {
+        // バリデーション
+        $request->validate([
+            'name' => 'required|max:255',   // 追加
+            'age' => 'required|max:255',
+            'area' => 'required|max:255',
+            'profile' => 'required|max:255',
+        ]);
+
+        // idの値でメッセージを検索して取得
+        $user = User::findOrFail($id);
+        // メッセージを更新
+        $user->name = $request->name; 
+        $user->age = $request->age;    // 追加
+        $user->area = $request->area; 
+        $user->profile = $request->profile;  
+        $user->save();
+
+        return redirect('/');
+        
+    }
+    
     
     
     
