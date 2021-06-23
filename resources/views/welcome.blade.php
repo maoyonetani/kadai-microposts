@@ -9,8 +9,11 @@
             <aside class="col-sm-4">
                 {{-- ユーザ情報 --}}
                 @include('users.card')
+                @if (Auth::id() == $user->id)　
                     {{-- メッセージ編集ページへのリンク --}}
     {!! link_to_route('users.edit', 'edit profile', ['user' => $user->id], ['class' => 'btn btn-primary']) !!}
+                @endif    
+                
             </aside>
             <div class="col-sm-8">
                 {{-- 投稿フォーム --}}

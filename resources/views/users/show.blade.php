@@ -8,9 +8,10 @@
             {{-- ユーザ情報 --}}
             @include('users.card')
             
-    {{-- メッセージ編集ページへのリンク --}}
-    
+                @if (Auth::id() == $user->id)　
+                    {{-- メッセージ編集ページへのリンク --}}
     {!! link_to_route('users.edit', 'edit profile', ['user' => $user->id], ['class' => 'btn btn-primary']) !!}
+                @endif  
     
         </aside>
         <div class="col-sm-8">
